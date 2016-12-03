@@ -1,0 +1,106 @@
+<apex:page standardStylesheets="false" docType="html-5.0" showheader="false" controller="geoChartCon">
+<!--Salesforce Lightning Design System Static Resource-->
+<apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
+<!--Google Charts Script-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<!--The Salesforce Lightning Design System Wrapping Div with Scoping Class -->
+<div class="minerva18">
+
+<div class="slds-page-header" role="banner">
+  <div class="slds-media slds-media--center">
+    <div class="slds-media__figure">
+      <img src="http://www.minerva18.com/Fav.png" style="height: 27px;"/>
+    </div>
+    <div class="slds-media__body">
+      <p class="slds-page-header__title slds-truncate slds-align-middle" title="JavaScript for SLDS Sections">Google GeoCharts in Salesforce</p>
+      <p class="slds-text-body--small page-header__info">By <a target="_blank" href="http://www.minerva18.com/blog/about-me/">Raghavendhra Yarlagadda</a> • <a href="http://www.minerva18.com/blog/using-the-lightning-design-checkbox-toggles-in-salesforce/" target="_blank">View Code &amp; Explanation</a></p>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+<!--GeoChart Container-->
+<div id="GeoChart" style="width: 100%;height: 400px;"></div>
+
+<script type="text/javascript">
+console.clear();
+google.charts.load('upcoming', {'packages':['geochart']});
+var country = [];
+var count = [];
+var ChartData = {!AllData};
+var chartDatalen = ChartData.length;
+var cntr = 0;
+google.charts.setOnLoadCallback(drawRegionsMap(cntr));
+
+function drawRegionsMap(idx) {
+  
+    var xmlhttp = new XMLHttpRequest();
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ChartData[idx].BillingCountry;
+    
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            var countryname = myArr.results[0].address_components[0].long_name
+            if(country.indexOf(countryname) != -1){
+                count[country.indexOf(countryname)] += ChartData[idx].expr0;
+            }else{
+                country.push(countryname);
+                count.push(ChartData[idx].expr0);
+            }
+            if(idx < chartDatalen-1){
+                drawRegionsMap(idx+1);
+            }else{
+                drawChart();
+            }
+        }
+    };
+    xmlhttp.open('GET', url, true);
+    xmlhttp.send();
+}
+
+ 
+  
+function drawChart(){
+  
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Country');
+    data.addColumn('number', 'Count');
+  
+    for(i = 0; i < count.length; i++)
+        data.addRow([country[i], count[i]]);
+    
+    
+    var options = {
+      colorAxis: {colors: ['#76c6ee', '#1589ee', '#0070d2']},
+      backgroundColor: '#ffffff',
+      datalessRegionColor: '#ffffff',
+      defaultColor: '#0070d2'
+    };
+    
+    var chart = new google.visualization.GeoChart(document.getElementById('GeoChart'));
+    
+    chart.draw(data, options);
+}
+</script>
+
+<br/>
+
+<h3 class="slds-section-title--divider SectionHead" style="text-align:center;">Get This Demo Page Code <a href="https://github.com/Minerva18/Minerva18-SDLS.js/blob/master/Demo-Visualforce-Pages/SLDS-Checkbox_Toggles.page" target="_blank" style="font-weight:bold;">HERE</a></h3>
+
+</div>
+<style>
+.SectionHead{
+    background-color: #f0f8fc !important;
+    //font-weight: 600; 
+    color: #00396B !important;
+    border-left: 4px solid #0070D2;
+    padding: 10px !important;
+}
+</style>
+</html>
+</apex:page>
