@@ -43,7 +43,7 @@ google.charts.setOnLoadCallback(standardizeData(cntr));
 function standardizeData(idx) {
   
     var xmlhttp = new XMLHttpRequest();
-//REPLACE YOUR_API_KEY BELOW WITH YOUR GOOGLE API KEY AS GENERATED WITH THE STEPS MENTIONED ABOVE
+//REPLACE YOUR_API_KEY BELOW WITH YOUR GOOGLE GEOCODING API KEY
     var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ChartData[idx].BillingCountry+'&key=YOUR_API_KEY';
     
     xmlhttp.onreadystatechange = function() {
