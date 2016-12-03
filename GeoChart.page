@@ -1,7 +1,7 @@
 <apex:page standardStylesheets="false" docType="html-5.0" showheader="false" controller="geoChartCon">
 <!--Salesforce Lightning Design System Static Resource-->
 <apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
-<!--Google Charts Script-->
+<!--Google Charts Script Source-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
 <head>
@@ -28,19 +28,23 @@
 <div id="GeoChart" style="width: 100%;height: 400px;"></div>
 
 <script type="text/javascript">
-console.clear();
+//Loading the GeoChart Library
 google.charts.load('upcoming', {'packages':['geochart']});
 var country = [];
 var count = [];
+//Our Data From Apex
 var ChartData = {!AllData};
+//Length of our Data Array
 var chartDatalen = ChartData.length;
 var cntr = 0;
-google.charts.setOnLoadCallback(drawRegionsMap(cntr));
+//Calling a standardizing function with the first record from our data
+google.charts.setOnLoadCallback(standardizeData(cntr));
 
-function drawRegionsMap(idx) {
+function standardizeData(idx) {
   
     var xmlhttp = new XMLHttpRequest();
-    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ChartData[idx].BillingCountry;
+//Replace YOUR_API_KEY below with your API Key 
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ChartData[idx].BillingCountry+'&key=YOUR_API_KEY';
     
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -53,8 +57,9 @@ function drawRegionsMap(idx) {
                 count.push(ChartData[idx].expr0);
             }
             if(idx < chartDatalen-1){
-                drawRegionsMap(idx+1);
+                standardizeData(idx+1);
             }else{
+//Calling the drawChart function to prepare data and draw the chart
                 drawChart();
             }
         }
@@ -66,15 +71,16 @@ function drawRegionsMap(idx) {
  
   
 function drawChart(){
-  
+//Initializing a Google DataTable(required format to plot data onto chart)
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Country');
     data.addColumn('number', 'Count');
-  
+
+//Adding our Standardized Data to Google DataTable
     for(i = 0; i < count.length; i++)
         data.addRow([country[i], count[i]]);
     
-    
+//Color options for the Chart, white and blue to blend into the standard salesforce colors
     var options = {
       colorAxis: {colors: ['#76c6ee', '#1589ee', '#0070d2']},
       backgroundColor: '#ffffff',
@@ -82,8 +88,10 @@ function drawChart(){
       defaultColor: '#0070d2'
     };
     
+//Getting the GeoChart Div Container
     var chart = new google.visualization.GeoChart(document.getElementById('GeoChart'));
-    
+
+//Drawing the GeoChart with Data and Options
     chart.draw(data, options);
 }
 </script>
