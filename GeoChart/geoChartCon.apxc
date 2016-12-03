@@ -1,0 +1,9 @@
+public with sharing class geoChartCon {
+ 
+public string AllData{get; set;}
+ 
+    public geoChartCon(){
+        AllData = JSON.serialize([SELECT BillingCountry, COUNT(Name) FROM Account GROUP BY BillingCountry ORDER BY BillingCountry]);    
+    }
+ 
+}
