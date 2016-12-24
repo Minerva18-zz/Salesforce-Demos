@@ -38,7 +38,7 @@ var ChartData = {!AllData};
 var chartDatalen = ChartData.length;
 var cntr = 0;
 //Calling a standardizing function with the first record from our data
-google.charts.setOnLoadCallback(standardizeData(cntr));
+google.charts.setOnLoadCallback(function(){standardizeData(cntr)});
 
 function standardizeData(idx) {
   
