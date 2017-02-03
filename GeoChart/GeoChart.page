@@ -3,7 +3,7 @@
 <apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system-vf.min.css')}" />
 <!--Google Charts Script Source-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <head>
    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -41,20 +41,22 @@ var cntr = 0;
 google.charts.setOnLoadCallback(function(){standardizeData(cntr)});
 
 function standardizeData(idx) {
-  
+
     var xmlhttp = new XMLHttpRequest();
 //REPLACE YOUR_API_KEY BELOW WITH YOUR GOOGLE GEOCODING API KEY
     var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ChartData[idx].BillingCountry+'&key=YOUR_API_KEY';
-    
+
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var myArr = JSON.parse(this.responseText);
-            var countryname = myArr.results[0].address_components[0].long_name
-            if(country.indexOf(countryname) != -1){
-                count[country.indexOf(countryname)] += ChartData[idx].expr0;
-            }else{
-                country.push(countryname);
-                count.push(ChartData[idx].expr0);
+            if(myArr.status != 'ZERO_RESULTS'){
+                var countryname = myArr.results[0].address_components[0].long_name;
+                if(country.indexOf(countryname) != -1){
+                    count[country.indexOf(countryname)] += ChartData[idx].expr0;
+                }else{
+                    country.push(countryname);
+                    count.push(ChartData[idx].expr0);
+                }
             }
             if(idx < chartDatalen-1){
                 standardizeData(idx+1);
@@ -68,8 +70,7 @@ function standardizeData(idx) {
     xmlhttp.send();
 }
 
- 
-  
+
 function drawChart(){
 //Initializing a Google DataTable(required format to plot data onto chart)
     var data = new google.visualization.DataTable();
@@ -79,7 +80,7 @@ function drawChart(){
 //Adding our Standardized Data to Google DataTable
     for(i = 0; i < count.length; i++)
         data.addRow([country[i], count[i]]);
-    
+
 //Color options for the Chart, white and blue to blend into the standard salesforce colors
     var options = {
       colorAxis: {colors: ['#76c6ee', '#1589ee', '#0070d2']},
@@ -87,7 +88,7 @@ function drawChart(){
       datalessRegionColor: '#ffffff',
       defaultColor: '#0070d2'
     };
-    
+
 //Getting the GeoChart Div Container
     var chart = new google.visualization.GeoChart(document.getElementById('GeoChart'));
 
@@ -104,7 +105,7 @@ function drawChart(){
 <style>
 .SectionHead{
     background-color: #f0f8fc !important;
-    //font-weight: 600; 
+    //font-weight: 600;
     color: #00396B !important;
     border-left: 4px solid #0070D2;
     padding: 10px !important;
