@@ -63,6 +63,6 @@
         </lightning:tab>
     </lightning:tabset>
     
-    <h3 class="slds-section-title--divider SectionHead" style="text-align:center;">Get This Demo Page Code <a href="https://github.com/Minerva18/Minerva18-SDLS.js/blob/master/Demo-Visualforce-Pages/SLDS-Tabs.page" style="font-weight:bold;" target="_blank">HERE</a></h3>
+    <h3 class="slds-section-title--divider SectionHead" style="text-align:center;">Get This Demo Component Code <a href="https://github.com/Minerva18/Salesforce-Demos/blob/master/Lightning%20Tabs/Tabs.cmp" style="font-weight:bold;" target="_blank">HERE</a></h3>
     
 </aura:component>
