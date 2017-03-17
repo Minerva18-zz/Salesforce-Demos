@@ -10,9 +10,9 @@
             </div>
         </div>
     </div>
-    
+
     <div class="slds-p-around--x-small">
-        
+
         <h3 class="slds-section-title--divider SectionHead">Default</h3>
         <lightning:tabset >
             <lightning:tab label="Item One">
@@ -25,8 +25,8 @@
                 Item Three Content
             </lightning:tab>
         </lightning:tabset>
-        
-        
+
+
         <h3 class="slds-section-title--divider slds-m-bottom--xx-small SectionHead">Scoped</h3>
         <lightning:tabset variant="scoped">
             <lightning:tab label="Item One">
@@ -39,7 +39,7 @@
                 Item Three Content
             </lightning:tab>
         </lightning:tabset>
-        
+
         <br/>
         <h3 class="slds-section-title--divider SectionHead">Nested</h3>
         <lightning:tabset >
@@ -63,9 +63,9 @@
                 <div style="height:93px;">Item Three Content</div>
             </lightning:tab>
         </lightning:tabset>
-        
+
     </div>
-    
-    <h3 class="slds-section-title--divider SectionHead" style="text-align:center;">Get This Demo Component Code <a href="https://github.com/Minerva18/Salesforce-Demos/blob/master/Lightning%20Tabs/Tabs.cmp" style="font-weight:bold;" target="_blank">HERE</a></h3>
-    
+
+    <h3 class="slds-section-title--divider SectionHead" style="text-align:center;">Get This Demo Component Code <a href="https://github.com/Minerva18/Salesforce-Demos/blob/master/Tabs%20in%20Lightning%20Components/Tabs.cmp" style="font-weight:bold;" target="_blank">HERE</a></h3>
+
 </aura:component>

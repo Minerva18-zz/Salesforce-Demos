@@ -25,7 +25,17 @@
 <br/>
 
 <!--GeoChart Container-->
-<div id="GeoChart" style="width: 100%;height: 400px;"></div>
+<div id="GeoChart" style="width: 100%;height: 400px;">
+<!-- SLDS Spinner Start-->
+    <div class="slds-spinner_container">
+      <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+        <span class="slds-assistive-text">Loading</span>
+        <div class="slds-spinner__dot-a"></div>
+        <div class="slds-spinner__dot-b"></div>
+      </div>
+    </div>
+<!-- SLDS Spinner End-->
+</div>
 
 <script type="text/javascript">
 //Loading the GeoChart Library
