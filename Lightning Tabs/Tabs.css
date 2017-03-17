@@ -1,0 +1,8 @@
+.THIS {
+}
+.THIS.SectionHead{
+    background-color: #f0f8fc !important;
+    color: #00396B !important;
+    border-left: 4px solid #0070D2;
+    padding: 10px !important;
+}
