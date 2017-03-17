@@ -1,0 +1,68 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    
+    <div class="slds-page-header" role="banner">
+        <div class="slds-media slds-media--center">
+            <div class="slds-media__figure">
+                <img src="http://www.minerva18.com/Fav.png" style="height: 27px;"/>
+            </div>
+            <div class="slds-media__body">
+                <p class="slds-page-header__title slds-truncate slds-align-middle" title="JavaScript for SLDS Tabs">JavaScript for SLDS Tabs</p>
+                <p class="slds-text-body--small page-header__info">By <a href="http://www.minerva18.com/blog/about-me/" target="_blank">Raghavendhra Yarlagadda</a> • <a href="http://www.minerva18.com/blog/creating-switchable-lightning-design-tabs-in-salesforce/" target="_blank">View Code &amp; Explanation</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <h3 class="slds-section-title--divider SectionHead">Default</h3>
+    <lightning:tabset >
+        <lightning:tab label="Item One">
+            Item One Content
+        </lightning:tab>
+        <lightning:tab label="Item Two">
+            Item Two Content
+        </lightning:tab>
+        <lightning:tab label="Item Three">
+            Item Three Content
+        </lightning:tab>
+    </lightning:tabset>
+    
+    
+    <h3 class="slds-section-title--divider slds-m-bottom--xx-small SectionHead">Scoped</h3>
+    <lightning:tabset variant="scoped">
+        <lightning:tab label="Item One">
+            Item One Content
+        </lightning:tab>
+        <lightning:tab label="Item Two">
+            Item Two Content
+        </lightning:tab>
+        <lightning:tab label="Item Three">
+            Item Three Content
+        </lightning:tab>
+    </lightning:tabset>
+    
+    <br/>
+    <h3 class="slds-section-title--divider SectionHead">Nested</h3>
+    <lightning:tabset >
+        <lightning:tab label="Item One">
+            <lightning:tabset variant="scoped">
+                <lightning:tab label="Item One">
+                    Item One Content
+                </lightning:tab>
+                <lightning:tab label="Item Two">
+                    Item Two Content
+                </lightning:tab>
+                <lightning:tab label="Item Three">
+                    Item Three Content
+                </lightning:tab>
+            </lightning:tabset>
+        </lightning:tab>
+        <lightning:tab label="Item Two">
+            <div style="height:93px;">Item Two Content</div>
+        </lightning:tab>
+        <lightning:tab label="Item Three">
+            <div style="height:93px;">Item Three Content</div>
+        </lightning:tab>
+    </lightning:tabset>
+    
+    <h3 class="slds-section-title--divider SectionHead" style="text-align:center;">Get This Demo Page Code <a href="https://github.com/Minerva18/Minerva18-SDLS.js/blob/master/Demo-Visualforce-Pages/SLDS-Tabs.page" style="font-weight:bold;" target="_blank">HERE</a></h3>
+    
+</aura:component>
