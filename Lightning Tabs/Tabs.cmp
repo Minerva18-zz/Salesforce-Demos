@@ -1,3 +1,4 @@
+<!--This Component Demonstrates the Lightning:Tabset Base Component-->
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
     
     <div class="slds-page-header" role="banner">
